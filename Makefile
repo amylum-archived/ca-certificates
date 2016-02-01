@@ -23,7 +23,7 @@ manual: build-container
 container: build-container
 	./meta/launch
 
-build: deps
+build: 
 	rm -rf $(BUILD_DIR)
 	mkdri -p $(BUILD_DIR)
 	curl -so $(BUILD_DIR)/update-ca-trust 'https://projects.archlinux.org/svntogit/packages.git/plain/trunk/update-ca-trust?h=packages/ca-certificates'
