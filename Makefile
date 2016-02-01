@@ -28,6 +28,14 @@ build:
 	mkdir -p $(BUILD_DIR)
 	curl -so $(BUILD_DIR)/update-ca-trust 'https://projects.archlinux.org/svntogit/packages.git/plain/trunk/update-ca-trust?h=packages/ca-certificates'
 	curl -so $(BUILD_DIR)/update-ca-trust.8.txt 'https://projects.archlinux.org/svntogit/packages.git/plain/trunk/update-ca-trust.8.txt?h=packages/ca-certificates'
+	cd $(BUILD_DIR) && asciidoc.py -v -d manpage -b docbook update-ca-trust.8.txt
+	cd $(BUILD_DIR) && xsltproc --nonet -o update-ca-trust.8 /etc/asciidoc/docbook-xsl/manpage.xsl update-ca-trust.8.xml
+	mkdir -p $(RELEASE_DIR)/usr/{bin,share/man/man8}
+	mkdir -p $(RELEASE_DIR)/{etc,usr/share}/$(PACKAGE)/trust-source/{anchors,blacklist}
+	mkdir -p $(RELEASE_DIR)/etc/{ssl/certs/java,$(PACKAGE)/extracted}
+	cp $(BUILD_DIR)/update-ca-trust $(RELEASE_DIR)/usr/bin/
+	cp $(BUILD_DIR)/update-ca-trust.8 $(RELEASE_DIR)/usr/share/man/man8/
+	ln -s ../$(PACKAGE)/extracted/tls-ca-bundle.pem $(RELEASE_DIR)/etc/ssl/cert.pem
 	cd $(RELEASE_DIR) && tar -czvf $(RELEASE_FILE) *
 
 version:
