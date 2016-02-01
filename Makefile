@@ -5,7 +5,7 @@ BUILD_DIR = /tmp/$(PACKAGE)-build
 RELEASE_DIR = /tmp/$(PACKAGE)-release
 RELEASE_FILE = /tmp/$(PACKAGE).tar.gz
 
-VERSION_FILE = /tmp/ca-certificates/version
+VERSION_FILE = /tmp/ca-certificates-version
 PACKAGE_VERSION = $$(cat $(VERSION_FILE))
 PATCH_VERSION = $$(cat version)
 VERSION = $(PACKAGE_VERSION)-$(PATCH_VERSION)
