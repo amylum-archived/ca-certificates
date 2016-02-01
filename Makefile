@@ -25,7 +25,7 @@ container: build-container
 
 build: 
 	rm -rf $(BUILD_DIR)
-	mkdri -p $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR)
 	curl -so $(BUILD_DIR)/update-ca-trust 'https://projects.archlinux.org/svntogit/packages.git/plain/trunk/update-ca-trust?h=packages/ca-certificates'
 	curl -so $(BUILD_DIR)/update-ca-trust.8.txt 'https://projects.archlinux.org/svntogit/packages.git/plain/trunk/update-ca-trust.8.txt?h=packages/ca-certificates'
 	cd $(RELEASE_DIR) && tar -czvf $(RELEASE_FILE) *
