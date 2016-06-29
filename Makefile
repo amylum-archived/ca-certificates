@@ -26,8 +26,8 @@ container: build-container
 build: 
 	rm -rf $(BUILD_DIR)
 	mkdir -p $(BUILD_DIR)
-	curl -so $(BUILD_DIR)/update-ca-trust 'https://projects.archlinux.org/svntogit/packages.git/plain/trunk/update-ca-trust?h=packages/ca-certificates'
-	curl -so $(BUILD_DIR)/update-ca-trust.8.txt 'https://projects.archlinux.org/svntogit/packages.git/plain/trunk/update-ca-trust.8.txt?h=packages/ca-certificates'
+	curl -so $(BUILD_DIR)/update-ca-trust 'https://git.archlinux.org/svntogit/packages.git/plain/trunk/update-ca-trust?h=packages/ca-certificates'
+	curl -so $(BUILD_DIR)/update-ca-trust.8.txt 'https://git.archlinux.org/svntogit/packages.git/plain/trunk/update-ca-trust.8.txt?h=packages/ca-certificates'
 	chmod 755 $(BUILD_DIR)/update-ca-trust
 	cd $(BUILD_DIR) && asciidoc.py -v -d manpage -b docbook update-ca-trust.8.txt
 	cd $(BUILD_DIR) && xsltproc --nonet -o update-ca-trust.8 /etc/asciidoc/docbook-xsl/manpage.xsl update-ca-trust.8.xml
