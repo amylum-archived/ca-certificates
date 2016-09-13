@@ -1,0 +1,14 @@
+name 'ca-certificates'
+org 'amylum'
+
+patch 'LICENSE.patch'
+
+build do
+  run 'mkbundle -f ca-bundle.crt trusted-roots'
+  run 'go run cmd/format/format.go -f ca-bundle.crt -d ca-bundle'
+  run 'false'
+end
+
+test do
+  # TODO: add tests
+end

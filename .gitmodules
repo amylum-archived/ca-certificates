@@ -1,0 +1,6 @@
+[submodule "upstream"]
+	path = upstream
+	url = git://github.com/cloudflare/cfssl_trust
+[submodule "meta"]
+	path = meta
+	url = git://github.com/amylum/pkgforge-helper

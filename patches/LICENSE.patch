@@ -1,0 +1,15 @@
+diff --git a/LICENSE b/LICENSE
+new file mode 100644
+index 0000000..658ff8b
+--- /dev/null
++++ b/LICENSE
+@@ -0,0 +1,9 @@
++The cert files used by this package were sourced via
++https://github.com/cloudflare/cfssl_trust
++
++Cloudflare has provided the focal repo for identifying all these certs, but the
++certs themselves are raw data identifying the CAs and thus are not copyrighted.
++
++The bundle was generated using cfssl (https://github.com/cloudflare/cfssl), a
++tool released under the BSD 2-clause license.
++

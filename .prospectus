@@ -1,13 +1,11 @@
 item do
   expected do
-    url_xpath
-    url 'https://www.archlinux.org/packages/core/any/ca-certificates/'
-    xpath '//*[@id="pkgdetails"]/h2'
-    regex /^ca-certificates ([\w.]*)-\d+$/
+    github_hash
+    repo 'cloudflare/cfssl_trust'
   end
 
   actual do
-    git_tag
-    regex /^(.*)-\d+$/
+    git_hash
+    dir 'upstream'
   end
 end

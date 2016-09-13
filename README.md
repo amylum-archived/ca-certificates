@@ -3,7 +3,7 @@ ca-certificates
 
 [![GPL2 Licensed](http://img.shields.io/badge/license-GPL2-green.svg)](https://tldrlegal.com/license/gnu-general-public-license-v2)
 
-Package repo for [ca-certificates](https://www.archlinux.org/packages/core/any/ca-certificates/)
+Package repo for SSL trust store. Based on [cfssl_trust](https://github.com/cloudflare/cfssl_trust)
 
 ## Usage
 
