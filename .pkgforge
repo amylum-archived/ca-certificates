@@ -3,6 +3,7 @@ org 'amylum'
 
 patch 'LICENSE.patch'
 patch 'format-fix.patch'
+patch 'trust.patch'
 
 build do
   gopath = tmpdir(:gopath)
