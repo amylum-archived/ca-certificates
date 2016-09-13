@@ -16,7 +16,7 @@ build do
   run 'go run cmd/format/format.go -f ca-bundle.crt -d ca-bundle', 'GOPATH' => gopath
 
   run "mkdir -p #{releasedir}/usr/bin"
-  run "mkdir -p ${releasedir}/etc/ssl/certs"
+  run "mkdir -p #{releasedir}/etc/ssl/certs"
   run "mkdir -p #{user_path}/extracted #{user_path}/trust-source/{anchors,blacklist}"
   run "mkdir -p #{system_path}/trust-source/{anchors,blacklist}"
 
