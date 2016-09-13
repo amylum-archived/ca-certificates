@@ -1,0 +1,18 @@
+diff --git a/update-ca-trust b/update-ca-trust
+new file mode 100755
+index 0000000..691e634
+--- /dev/null
++++ b/update-ca-trust
+@@ -0,0 +1,12 @@
++#!/usr/bin/env bash
++
++DEST=/etc/ca-certificates/extracted
++
++trust extract --overwrite --format=pem-directory-hash --filter=ca-anchors --purpose server-auth  $DEST/cadir
++trust extract --overwrite --format=pem-bundle         --filter=ca-anchors --purpose server-auth  $DEST/tls-ca-bundle.pem
++trust extract --overwrite --format=openssl-bundle     --filter=certificates                      $DEST/ca-bundle.trust.crt
++
++# Update all links in /etc/ssl/certs and then prune broken symlinks
++find $DEST/cadir -type f | xargs -n1 ln -fsr -t /etc/ssl/certs
++find -L /etc/ssl/certs -maxdepth 1 -type l -delete
++
