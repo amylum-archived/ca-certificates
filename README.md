@@ -1,7 +1,9 @@
 ca-certificates
 ==========
 
-[![GPL2 Licensed](http://img.shields.io/badge/license-GPL2-green.svg)](https://tldrlegal.com/license/gnu-general-public-license-v2)
+[![Build Status](https://img.shields.io/circleci/project/amylum/ca-certificates.svg)](https://circleci.com/gh/amylum/ca-certificates)
+[![GitHub release](https://img.shields.io/github/release/amylum/ca-certificates.svg)](https://github.com/amylum/ca-certificates/releases)
+[![MIT Licensed](https://img.shields.io/badge/license-MIT-green.svg)](https://tldrlegal.com/license/mit-license)
 
 Package repo for SSL trust store. Based on [cfssl_trust](https://github.com/cloudflare/cfssl_trust)
 
