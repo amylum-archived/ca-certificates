@@ -6,9 +6,14 @@ patch 'format-fix.patch'
 
 build do
   gopath = tmpdir(:gopath)
+  user_path = "#{releasedir}/etc/ca-certificates"
+  system_path = "#{releasedir}/usr/share/ca-certificates"
   run 'mkbundle -f ca-bundle.crt trusted_roots'
   run 'cd cmd/format && go get -d', 'GOPATH' => gopath
   run 'go run cmd/format/format.go -f ca-bundle.crt -d ca-bundle', 'GOPATH' => gopath
+  run "mkdir -p #{user_path}/extracted #{user_path}/trust-source/{anchors,blacklist}"
+  run "mkdir -p #{system_path}/trust-source/{anchors,blacklist}"
+  run "cp ca-bundle/* #{system_path}/trust-source/anchors/"
   run 'false'
 end
 
