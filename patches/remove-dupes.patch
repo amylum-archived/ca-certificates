@@ -1,0 +1,13 @@
+diff --git a/cmd/format/format.go b/cmd/format/format.go
+index c3bbc51..05223ed 100644
+--- a/cmd/format/format.go
++++ b/cmd/format/format.go
+@@ -81,7 +81,7 @@ func applyNamingConv(file []byte, filename string) error {
+ 	// already a "commonname_issuedate_sigalg.crt", etc...
+ 	filenameCount[name]++
+ 	if filenameCount[name] > 1 {
+-		name += "_" + strconv.Itoa(filenameCount[name])
++		return nil
+ 	}
+ 
+ 	//Strip any invalid chars from the name
