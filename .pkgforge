@@ -12,6 +12,7 @@ build do
   user_path = "#{releasedir}/etc/ca-certificates"
   system_path = "#{releasedir}/usr/share/ca-certificates"
 
+  run 'rm ca-bundle/*'
   run 'mkbundle -f ca-bundle.crt trusted_roots'
   run 'cd cmd/format && go get -d', 'GOPATH' => gopath
   run 'go run cmd/format/format.go -f ca-bundle.crt -d ca-bundle', 'GOPATH' => gopath

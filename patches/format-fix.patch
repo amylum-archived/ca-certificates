@@ -13,7 +13,7 @@ index c3bbc51..bf39d26 100644
  	// If CommonName field is empty, then use the Organization name instead
  	if len(response.Subject.CommonName) == 0 {
 +		if len(response.Subject.Organization) == 0 {
-+			fmt.Println("Failing to rename due to missing CN and Org fields: %s", filename)
++			fmt.Printf("Failing to rename due to missing CN and Org fields: %s", filename)
 +			return nil
 +		}
  		name = strings.Replace(response.Subject.Organization[0], " ", "", -1)
