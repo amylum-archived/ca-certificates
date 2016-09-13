@@ -1,2 +1,2 @@
 FROM dock0/pkgforge
-RUN pacman -S --noconfirm --needed cfssl-amylum
+RUN pacman -Sy --noconfirm --needed cfssl-amylum
