@@ -2,7 +2,6 @@ name 'ca-certificates'
 org 'amylum'
 
 patch 'LICENSE.patch'
-patch 'format-fix.patch'
 patch 'remove-dupes.patch'
 patch 'trust.patch'
 patch 'binary.patch'
