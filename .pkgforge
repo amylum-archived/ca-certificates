@@ -1,10 +1,8 @@
 name 'ca-certificates'
 org 'amylum'
 
-patch 'LICENSE.patch'
-patch 'remove-dupes.patch'
-patch 'trust.patch'
 patch 'binary.patch'
+patch 'trust.patch'
 
 build do
   gopath = tmpdir(:gopath)
