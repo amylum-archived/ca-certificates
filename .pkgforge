@@ -11,8 +11,8 @@ build do
 
   run 'rm certdata/ca-bundle/*'
   run 'mkbundle -f ca-bundle.crt trusted_roots'
-  run 'cd cmd/format && go get -d', 'GOPATH' => gopath
-  run 'go run cmd/format/format.go -f ca-bundle.crt -d ca-bundle', 'GOPATH' => gopath
+
+  run 'cd cmd && go get -d && go build .'
 
   run "mkdir -p #{releasedir}/usr/bin"
   run "mkdir -p #{releasedir}/etc/ssl/certs"
@@ -20,7 +20,7 @@ build do
   run "mkdir -p #{system_path}/trust-source/{anchors,blacklist}"
 
   run "cp update-ca-trust #{releasedir}/usr/bin/"
-  run "cp ca-bundle/* #{system_path}/trust-source/anchors/"
+  run "cp certdata/ca-bundle/* #{system_path}/trust-source/anchors/"
   run "ln -s ../ca-certificates/extracted/tls-ca-bundle.pem #{releasedir}/etc/ssl/cert.pem"
 end
 
