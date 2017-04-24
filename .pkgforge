@@ -10,7 +10,7 @@ build do
   system_path = "#{releasedir}/usr/share/ca-certificates"
   bin_path = './cmd/cfssl-trust/cfssl-trust'
 
-  run 'cd cmd/cfssl_trust && go get -d && go build .'
+  run 'cd cmd/cfssl-trust && go get -d && go build .'
 
   def build_bundle(bundle_type)
     run "#{bin_path} release -b #{bundle_type} -d cert.db"
