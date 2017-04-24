@@ -8,11 +8,18 @@ build do
   gopath = tmpdir(:gopath)
   user_path = "#{releasedir}/etc/ca-certificates"
   system_path = "#{releasedir}/usr/share/ca-certificates"
+  bin_path = './cmd/cfssl-trust/cfssl-trust'
 
-  run 'rm certdata/ca-bundle/*'
-  run 'mkbundle -f ca-bundle.crt trusted_roots'
+  run 'cd cmd/cfssl_trust && go get -d && go build .'
 
-  run 'cd cmd && go get -d && go build .'
+  def build_bundle(bundle_type)
+    run "#{bin_path} release -b #{bundle_type} -d cert.db"
+    release = `#{bin_path} releases -b #{bundle_type} -d cert.db`.lines.first.split.last
+    run "#{bin_path} bundle -b #{bundle_type} -d cert.db > #{bundle_type}-bundle.crt"
+  end
+
+  build_bundle('ca')
+  build_bundle('int')
 
   run "mkdir -p #{releasedir}/usr/bin"
   run "mkdir -p #{releasedir}/etc/ssl/certs"
