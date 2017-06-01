@@ -12,14 +12,28 @@ build do
 
   run 'cd cmd/cfssl-trust && go get -d && go build .'
 
-  def build_bundle(bundle_type)
-    run "#{bin_path} release -b #{bundle_type} -d cert.db"
-    release = `#{bin_path} releases -b #{bundle_type} -d cert.db`.lines.first.split.last
-    run "#{bin_path} bundle -b #{bundle_type} -d cert.db > #{bundle_type}-bundle.crt"
+  def split_bundle(build_dir, bundle_type)
+    run "mkdir -p #{bundle_type}-bundle"
+    run "csplit -f #{bundle_type}-bundle/tmpcert- #{bundle_type}-bundle.crt '/-----BEGIN CERTIFICATE-----/' '{*}'"
+    run "grep -L BEGIN #{bundle_type}-bundle/* | xargs rm"
+    Dir.chdir(build_dir) do
+      Dir.glob("#{bundle_type}-bundle/*").each do |tmpname|
+        newname = `openssl x509 -hash -in #{tmpname} -noout`.strip
+        FileUtils.mv tmpname, File.join("#{bundle_type}-bundle", newname + '.crt')
+      end
+    end
   end
 
-  build_bundle('ca')
-  build_bundle('int')
+  def build_bundle(bin_path, bundle_type)
+    build_dir = @forge.tmpdir(:build)
+    run "#{bin_path} release -b #{bundle_type} -d cert.db"
+    release = `cd #{build_dir} && #{bin_path} releases -b #{bundle_type} -d cert.db`.lines.first.split.last
+    run "#{bin_path} bundle -b #{bundle_type} -d cert.db -r #{release} > #{bundle_type}-bundle.crt"
+    split_bundle(build_dir, bundle_type)
+  end
+
+  build_bundle(bin_path, 'ca')
+  #build_bundle(bin_path, 'int')
 
   run "mkdir -p #{releasedir}/usr/bin"
   run "mkdir -p #{releasedir}/etc/ssl/certs"
@@ -27,7 +41,8 @@ build do
   run "mkdir -p #{system_path}/trust-source/{anchors,blacklist}"
 
   run "cp update-ca-trust #{releasedir}/usr/bin/"
-  run "cp certdata/ca-bundle/* #{system_path}/trust-source/anchors/"
+  run "cp ca-bundle/* #{system_path}/trust-source/anchors/"
+  run "cp ca-bundle.crt #{releasedir}/etc/ca-certificates/extracted/tls-ca-bundle.pem"
   run "ln -s ../ca-certificates/extracted/tls-ca-bundle.pem #{releasedir}/etc/ssl/cert.pem"
 end
 
