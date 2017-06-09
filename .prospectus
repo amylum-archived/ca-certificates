@@ -1,3 +1,8 @@
+Prospectus.extra_dep('file', 'prospectus_circleci')
+Prospectus.extra_dep('file', 'prospectus_pkgforge')
+
+my_slug = 'amylum/ca-certificates'
+
 item do
   expected do
     github_hash
@@ -8,4 +13,7 @@ item do
     git_hash
     dir 'upstream'
   end
+
+  extend ProspectusPkgforge::DepItems
+  extend ProspectusCircleci::Build.new(my_slug)
 end
