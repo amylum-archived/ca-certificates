@@ -6,13 +6,14 @@ my_slug = pkgforge.org + '/' + pkgforge.name
 
 item do
   expected do
-    github_hash
+    github_tag
     repo 'cloudflare/cfssl_trust'
+    regex /^trust-store-(\d+)\.(\d+)\.(\d+)$/, '\1\2-\3'
   end
 
   actual do
-    git_hash
-    dir 'upstream'
+    git_tag
+    regex /^(.*)-\d+$/
   end
 
   extend ProspectusPkgforge::DepItems
