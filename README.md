@@ -1,7 +1,7 @@
 ca-certificates
 ==========
 
-[![Build Status](https://img.shields.io/circleci/project/amylum/ca-certificates/master.svg)](https://circleci.com/gh/amylum/ca-certificates)
+[![Build Status](https://img.shields.io/travis/com/amylum/ca-certificates.svg)](https://travis-ci.com/amylum/ca-certificates)
 [![GitHub release](https://img.shields.io/github/release/amylum/ca-certificates.svg)](https://github.com/amylum/ca-certificates/releases)
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-green.svg)](https://tldrlegal.com/license/mit-license)
 
